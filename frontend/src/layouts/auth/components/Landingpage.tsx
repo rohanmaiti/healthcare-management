@@ -20,7 +20,7 @@ import {
   ChevronUp
 } from "lucide-react";
 import useThemeClasses from "../../../theme/useThemeClasses";
-import { useTheme } from "../../../theme/useTheme";
+import { useThemeContext } from "../../../theme/useTheme";
 import FloatingElements from "../../../components/FloatingElements";
 import LoadingScreen from "../../../components/LoadingScreen";
 
@@ -30,7 +30,7 @@ export const Landingpage = () => {
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const themeClasses = useThemeClasses();
-  const { toggleTheme, isDark } = useTheme();
+  const { toggleTheme, isDark } = useThemeContext();
 
   // Comment out auth check for now to show landing page
   // const authUser = {
@@ -154,7 +154,7 @@ export const Landingpage = () => {
                 <Hospital className="w-6 h-6 text-white" />
               </div>
               <span className={`text-xl font-bold ${themeClasses.text.primary}`}>
-                CityHealth
+                Medisync
               </span>
             </motion.div>
 
@@ -478,11 +478,11 @@ export const Landingpage = () => {
                 <Hospital className="w-6 h-6 text-white" />
               </div>
               <span className={`text-xl font-bold ${themeClasses.text.primary}`}>
-                CityHealth
+                Medisync
               </span>
             </div>
             <div className={`${themeClasses.text.secondary} text-center md:text-right`}>
-              <p>&copy; 2025 CityHealth. All rights reserved.</p>
+              <p>&copy; 2025 Medisync. All rights reserved.</p>
               <p className="text-sm mt-1">Revolutionizing healthcare management across cities.</p>
             </div>
           </div>

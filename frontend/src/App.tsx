@@ -5,6 +5,7 @@ import useThemeClasses from "./theme/useThemeClasses";
 import { Landingpage } from "./layouts/auth/components/Landingpage";
 import { Loginpage } from "./layouts/auth/components/Loginpage";
 import { Signinpage } from "./layouts/auth/components/Signinpage";
+import { ForgotPasswordpage } from "./layouts/auth/components/ForgotPasswordpage";
 import { IfnotLogin } from "./layouts/auth/protectedRoutes/IfnotLogin";
 import { HospitalAdminProtected } from "./layouts/auth/protectedRoutes/HospitalAdminProtected";
 
@@ -16,6 +17,7 @@ function App() {
         <Route element={<IfnotLogin />}>
           <Route path="/login" element={<Loginpage />} />
           <Route path="/signup" element={<Signinpage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordpage />} />
         </Route>
 
         <Route path="/" element={<HospitalAdminProtected/>} >

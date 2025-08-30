@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { 
@@ -30,36 +30,44 @@ const userTypes = [
 ];
 
 export const Loginpage = () => {
-  const [formData, setFormData] = useState({
+  const formDataRef = useRef({
     email: '',
     password: '',
     userType: 'user'
+  });
+  const [inputValues, setInputValues] = useState({
+    email: '',
+    password: ''
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<{[key: string]: string}>({});
+  const [selectedUserTypeValue, setSelectedUserTypeValue] = useState('user'); // Track selected user type for UI updates
 
   const themeClasses = useThemeClasses();
   const { toggleTheme, isDark } = useThemeContext();
 
-  const selectedUserType = userTypes.find(type => type.value === formData.userType);
+  const selectedUserType = userTypes.find(type => type.value === selectedUserTypeValue);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    formDataRef.current[name as keyof typeof formDataRef.current] = value;
+    setInputValues(prev => ({ ...prev, [name]: value }));
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
 
   const handleUserTypeSelect = (userType: string) => {
-    setFormData(prev => ({ ...prev, userType }));
+    formDataRef.current.userType = userType;
+    setSelectedUserTypeValue(userType);
     setIsDropdownOpen(false);
   };
 
   const validateForm = () => {
     const newErrors: {[key: string]: string} = {};
+    const formData = formDataRef.current;
 
     if (!formData.email) {
       newErrors.email = 'Email is required';
@@ -86,7 +94,7 @@ export const Loginpage = () => {
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
-      console.log('Login:', formData);
+      console.log('Login:', formDataRef.current);
       // Handle login logic here
     }, 2000);
   };
@@ -195,7 +203,7 @@ export const Loginpage = () => {
                 <input
                   type="email"
                   name="email"
-                  value={formData.email}
+                  value={inputValues.email}
                   onChange={handleInputChange}
                   className={`w-full pl-10 pr-4 py-3 ${themeClasses.bg.secondary} ${themeClasses.border.primary} border rounded-lg ${themeClasses.text.primary} placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 ${isDark ? 'focus:ring-blue-500' : 'focus:ring-green-500'} transition-all`}
                   placeholder="Enter your email"
@@ -222,7 +230,7 @@ export const Loginpage = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   name="password"
-                  value={formData.password}
+                  value={inputValues.password}
                   onChange={handleInputChange}
                   className={`w-full pl-10 pr-12 py-3 ${themeClasses.bg.secondary} ${themeClasses.border.primary} border rounded-lg ${themeClasses.text.primary} placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 ${isDark ? 'focus:ring-blue-500' : 'focus:ring-green-500'} transition-all`}
                   placeholder="Enter your password"

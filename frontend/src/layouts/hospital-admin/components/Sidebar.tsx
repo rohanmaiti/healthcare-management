@@ -153,9 +153,9 @@ const Sidebar: React.FC<SidebarProps> = ({
             )}
           </button>
 
-          {profileMenuOpen && sidebarExpanded && (
+          {profileMenuOpen  && (
             <div
-              className={`absolute bottom-full mb-2 left-0 right-0 rounded-lg shadow-lg py-1 ${themeClasses.bg.card} ${themeClasses.border.primary} border`}
+              className={`absolute bottom-full mb-2 left-0 rounded-lg shadow-lg py-1 ${themeClasses.bg.card} ${themeClasses.border.primary} border`}
             >
               <button
                 className={`w-full flex items-center px-3 py-2 text-sm transition-colors ${themeClasses.button.ghost}`}

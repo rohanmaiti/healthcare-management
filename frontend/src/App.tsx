@@ -9,11 +9,13 @@ import { ForgotPasswordpage } from "./layouts/auth/components/ForgotPasswordpage
 import { IfnotLogin } from "./layouts/auth/protectedRoutes/IfnotLogin";
 import { HospitalAdminProtected } from "./layouts/auth/protectedRoutes/HospitalAdminProtected";
 import { Dashboard } from "./screens/hospital-admin/components/Dashboard";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Landingpage />} /> 
+    <>
+      <Routes>
+        <Route path="/" element={<Landingpage />} />
 
         <Route element={<IfnotLogin />}>
           <Route path="/login" element={<Loginpage />} />
@@ -21,19 +23,22 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPasswordpage />} />
         </Route>
 
-        <Route path="/" element={<HospitalAdminProtected/>} >
-        <Route path="/hospital-admin" element={<HospitalAdminLayout />}>
-          <Route index element={<Navigate to="dashboard" replace />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="employee" element={<Employees />} />
-          <Route path="departments" element={<Departments />} />
-          <Route path="opd" element={<OPD />} />
-          <Route path="patients" element={<Patients />} />
-          <Route path="settings" element={<Settings />} />
+        <Route path="/" element={<HospitalAdminProtected />}>
+          <Route path="/hospital-admin" element={<HospitalAdminLayout />}>
+            <Route index element={<Navigate to="dashboard" replace />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="employee" element={<Employees />} />
+            <Route path="departments" element={<Departments />} />
+            <Route path="opd" element={<OPD />} />
+            <Route path="patients" element={<Patients />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
         </Route>
-        </Route>
-      
-    </Routes>
+
+        
+      </Routes>
+      <Toaster />
+    </>
   );
 }
 

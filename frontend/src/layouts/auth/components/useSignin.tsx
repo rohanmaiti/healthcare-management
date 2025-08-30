@@ -1,4 +1,6 @@
 import React, { useRef, useState } from 'react'
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { signup } from '../../../store/slices/auth.slice';
 
 export const useSignin = () => {
       const firstNameRef = useRef<HTMLInputElement>(null);
@@ -21,8 +23,10 @@ export const useSignin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<{[key: string]: string}>({});
+
+  const dispatch = useAppDispatch();
+  const { isLoading } = useAppSelector((state:any) => state?.authReducer);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name } = e.target;
@@ -131,8 +135,6 @@ export const useSignin = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
-
-    setIsLoading(true);
    
     // Collect form data from refs
     const formData = {
@@ -153,13 +155,9 @@ export const useSignin = () => {
       hospitalPhone1: hospitalPhone1Ref.current?.value || '',
       hospitalPhone2: hospitalPhone2Ref.current?.value || ''
     };
+
+    dispatch(signup(formData));
     
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
-      console.log('Signup:', formData);
-      // Handle signup logic here
-    }, 2000);
   };
 
   return {

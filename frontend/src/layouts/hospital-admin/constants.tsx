@@ -2,7 +2,6 @@
 import {
   LayoutDashboard,
   Users,
-  Calendar,
   Settings,
   HousePlus,
   ClipboardPlus,

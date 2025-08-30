@@ -27,7 +27,7 @@ export const Landingpage = () => {
   }
 
   if (authUser) {
-    return <Navigate to={`/${authUser?.userType}`} />;
+    return <Navigate to={`/${authUser.userType}`} />;
   }
 
   return (

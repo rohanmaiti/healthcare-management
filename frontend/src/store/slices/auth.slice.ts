@@ -12,7 +12,7 @@ interface ApiError {
 }
 
 interface User {
-  id: string;
+  _id: string;
   email: string;
   userType:
     | "user"

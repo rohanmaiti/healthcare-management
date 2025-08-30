@@ -1,5 +1,4 @@
 import { Hospital } from 'lucide-react'
-import React from 'react'
 import { useThemeClasses } from '../../../theme'
 
 export const Footer = () => {

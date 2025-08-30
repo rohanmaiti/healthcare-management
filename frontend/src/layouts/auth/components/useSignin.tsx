@@ -26,7 +26,7 @@ export const useSignin = () => {
   const [errors, setErrors] = useState<{[key: string]: string}>({});
 
   const dispatch = useAppDispatch();
-  const { isLoading } = useAppSelector((state:any) => state?.authReducer);
+  const { isLoading } = useAppSelector((state) => state?.authReducer);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name } = e.target;

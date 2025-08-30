@@ -1,3 +1,16 @@
+interface User {
+  _id?: string;
+  email?: string;
+  userType?:
+    | "user"
+    | "hospital-admin"
+    | "doctor"
+    | "inventory-manager"
+    | "receptionist";
+  firstName?: string;
+  lastName?: string;
+}
+
 // export const authUser = {
 //     _id: 123,
 //     userType: 'hospital-admin'
@@ -24,4 +37,4 @@
 //     userType: 'receptionist'
 // }
 
-export const authUser = null;    
+export const authUser: User | null = null;    

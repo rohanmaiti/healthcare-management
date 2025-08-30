@@ -10,10 +10,12 @@ import { IfnotLogin } from "./layouts/auth/protectedRoutes/IfnotLogin";
 import { HospitalAdminProtected } from "./layouts/auth/protectedRoutes/HospitalAdminProtected";
 import { Dashboard } from "./screens/hospital-admin/components/Dashboard";
 import { Toaster } from "react-hot-toast";
+import FaviconGenerator from "./components/FaviconGenerator";
 
 function App() {
   return (
     <>
+      <FaviconGenerator />
       <Routes>
         <Route path="/" element={<Landingpage />} />
 

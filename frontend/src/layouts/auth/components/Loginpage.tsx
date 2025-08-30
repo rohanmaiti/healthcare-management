@@ -257,7 +257,7 @@ export const Loginpage = () => {
                 to="/signup"
                 className={`font-medium ${themeClasses.text.accent} hover:underline transition-colors`}
               >
-                Login up here
+                Sign up here
               </Link>
             </p>
           </div>

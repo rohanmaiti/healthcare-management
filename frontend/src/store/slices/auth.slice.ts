@@ -46,6 +46,7 @@ export const login = createAsyncThunk<
     return res.data;
   } catch (error) {
     const apiError = error as ApiError;
+    console.log(apiError);
     return rejectWithValue(apiError?.response?.data?.message || apiError?.message || "Login failed");
   }
 });

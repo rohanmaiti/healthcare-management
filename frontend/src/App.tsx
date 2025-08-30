@@ -2,12 +2,13 @@ import "./App.css";
 import HospitalAdminLayout from "./layouts/hospital-admin/HospitalAdminLayout";
 import { Route, Routes, Navigate } from "react-router-dom";
 import useThemeClasses from "./theme/useThemeClasses";
-import { Landingpage } from "./layouts/auth/components/Landingpage";
+import { Landingpage } from "./layouts/auth/Landingpage";
 import { Loginpage } from "./layouts/auth/components/Loginpage";
 import { Signinpage } from "./layouts/auth/components/Signinpage";
 import { ForgotPasswordpage } from "./layouts/auth/components/ForgotPasswordpage";
 import { IfnotLogin } from "./layouts/auth/protectedRoutes/IfnotLogin";
 import { HospitalAdminProtected } from "./layouts/auth/protectedRoutes/HospitalAdminProtected";
+import { Dashboard } from "./screens/hospital-admin/components/Dashboard";
 
 function App() {
   return (
@@ -37,19 +38,19 @@ function App() {
 }
 
 // Placeholder components - you can replace these with your actual components
-const Dashboard = () => {
-  const themeClasses = useThemeClasses();
-  return (
-    <div className="p-6">
-      <h1 className={`text-2xl font-bold mb-4 ${themeClasses.text.primary}`}>
-        Dashboard
-      </h1>
-      <p className={themeClasses.text.secondary}>
-        Welcome to the Hospital Admin Dashboard
-      </p>
-    </div>
-  );
-};
+// const Dashboard = () => {
+//   const themeClasses = useThemeClasses();
+//   return (
+//     <div className="p-6">
+//       <h1 className={`text-2xl font-bold mb-4 ${themeClasses.text.primary}`}>
+//         Dashboard
+//       </h1>
+//       <p className={themeClasses.text.secondary}>
+//         Welcome to the Hospital Admin Dashboard
+//       </p>
+//     </div>
+//   );
+// };
 
 const Employees = () => {
   const themeClasses = useThemeClasses();

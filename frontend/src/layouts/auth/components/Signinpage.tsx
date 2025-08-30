@@ -30,6 +30,8 @@ const userTypes = [
   { value: 'user', label: 'Patient', icon: <User className="w-4 h-4" />, color: 'from-green-500 to-emerald-500' },
   { value: 'hospital-admin', label: 'Hospital Admin', icon: <Building className="w-4 h-4" />, color: 'from-purple-500 to-pink-500' },
   // { value: 'doctor', label: 'Doctor', icon: <Stethoscope className="w-4 h-4" />, color: 'from-blue-500 to-cyan-500' }, // future scope 
+  // { value: 'inventory-manager', label: 'Inventory Manager', icon: <Package className="w-4 h-4" />, color: 'from-orange-500 to-red-500' }, // future scope
+  // { value: 'receptionist', label: 'Receptionist', icon: <UserCheck className="w-4 h-4" />, color: 'from-teal-500 to-cyan-500' } // future scope
 ];
 
 export const Signinpage = () => {
@@ -237,46 +239,54 @@ export const Signinpage = () => {
         </div>
 
         {/* Right Side - Form */}
-        <div className="w-full lg:w-1/2 xl:w-3/5 flex items-center justify-center p-6 lg:p-12 overflow-y-auto min-h-screen">
-          <div className="max-w-md w-full space-y-8 relative z-10 py-8">
-            {/* Mobile Logo */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center lg:hidden"
-            >
-              <motion.div 
-                className="flex justify-center mb-6"
-                whileHover={{ scale: 1.05 }}
+        <div className="w-full lg:w-1/2 xl:w-3/5 flex flex-col max-h-screen">
+          {/* Sticky Header */}
+          <div className="sticky top-0 bg-inherit z-20 p-6 lg:p-12 pb-4 lg:pb-6">
+            <div className="max-w-md w-full mx-auto">
+              {/* Mobile Logo */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="text-center lg:hidden"
               >
-                <div className={`p-3 rounded-2xl ${themeClasses.accent.gradient} shadow-lg`}>
-                  <Hospital className="w-10 h-10 text-white" />
-                </div>
+                <motion.div 
+                  className="flex justify-center mb-6"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <div className={`p-3 rounded-2xl ${themeClasses.accent.gradient} shadow-lg`}>
+                    <Hospital className="w-10 h-10 text-white" />
+                  </div>
+                </motion.div>
+
+                <h2 className={`text-3xl font-bold ${themeClasses.text.primary} mb-2`}>
+                  Create Account
+                </h2>
+                <p className={`${themeClasses.text.secondary}`}>
+                  Join Medisync to get started with healthcare management
+                </p>
               </motion.div>
 
-              <h2 className={`text-3xl font-bold ${themeClasses.text.primary} mb-2`}>
-                Create Account
-              </h2>
-              <p className={`${themeClasses.text.secondary}`}>
-                Join Medisync to get started with healthcare management
-              </p>
-            </motion.div>
+              {/* Desktop Header */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="text-center hidden lg:block"
+              >
+                <h2 className={`text-3xl font-bold ${themeClasses.text.primary} mb-2`}>
+                  Create Account
+                </h2>
+                <p className={`${themeClasses.text.secondary}`}>
+                  Fill in your details to get started
+                </p>
+              </motion.div>
+            </div>
+          </div>
 
-            {/* Desktop Header */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center hidden lg:block"
-            >
-              <h2 className={`text-3xl font-bold ${themeClasses.text.primary} mb-2`}>
-                Create Account
-              </h2>
-              <p className={`${themeClasses.text.secondary}`}>
-                Fill in your details to get started
-              </p>
-            </motion.div>
+          {/* Scrollable Form Content */}
+          <div className="flex-1 overflow-y-auto px-6 lg:px-12 pb-6 lg:pb-12">
+            <div className="max-w-md w-full mx-auto space-y-8 relative z-10">
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -407,130 +417,8 @@ export const Signinpage = () => {
                     </motion.p>
                   )}
                 </div>
-            {/* Name Fields */}
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className={`block text-sm font-medium ${themeClasses.text.primary} mb-2`}>
-                  First Name
-                </label>
-                <input
-                  type="text"
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleInputChange}
-                  className={`w-full px-4 py-3 ${themeClasses.bg.secondary} ${themeClasses.border.primary} border rounded-lg ${themeClasses.text.primary} placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 ${isDark ? 'focus:ring-blue-500' : 'focus:ring-green-500'} transition-all`}
-                  placeholder="John"
-                />
-                {errors.firstName && (
-                  <motion.p 
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="mt-1 text-sm text-red-500"
-                  >
-                    {errors.firstName}
-                  </motion.p>
-                )}
-              </div>
-              <div>
-                <label className={`block text-sm font-medium ${themeClasses.text.primary} mb-2`}>
-                  Last Name
-                </label>
-                <input
-                  type="text"
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={handleInputChange}
-                  className={`w-full px-4 py-3 ${themeClasses.bg.secondary} ${themeClasses.border.primary} border rounded-lg ${themeClasses.text.primary} placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 ${isDark ? 'focus:ring-blue-500' : 'focus:ring-green-500'} transition-all`}
-                  placeholder="Doe"
-                />
-                {errors.lastName && (
-                  <motion.p 
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="mt-1 text-sm text-red-500"
-                  >
-                    {errors.lastName}
-                  </motion.p>
-                )}
-              </div>
-            </div>
 
-            {/* User Type Selection */}
-            <div>
-              <label className={`block text-sm font-medium ${themeClasses.text.primary} mb-2`}>
-                Account Type
-              </label>
-              <div className="relative">
-                <motion.button
-                  type="button"
-                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  className={`w-full flex items-center justify-between px-4 py-3 ${themeClasses.bg.secondary} ${themeClasses.border.primary} border rounded-lg ${themeClasses.text.primary} focus:outline-none focus:ring-2 focus:ring-offset-2 ${isDark ? 'focus:ring-blue-500' : 'focus:ring-green-500'} transition-all`}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <div className="flex items-center space-x-3">
-                    <div className={`p-1.5 rounded-md bg-gradient-to-r ${selectedUserType?.color}`}>
-                      {selectedUserType?.icon}
-                    </div>
-                    <span className="font-medium">{selectedUserType?.label}</span>
-                  </div>
-                  <ChevronDown className={`w-5 h-5 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
-                </motion.button>
-
-                {isDropdownOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className={`absolute top-full left-0 right-0 mt-2 ${themeClasses.bg.card} ${themeClasses.border.primary} border rounded-lg shadow-lg z-50 backdrop-blur-sm`}
-                  >
-                    {userTypes.map((type) => (
-                      <motion.button
-                        key={type.value}
-                        type="button"
-                        onClick={() => handleUserTypeSelect(type.value)}
-                        className={`w-full flex items-center space-x-3 px-4 py-3 ${themeClasses.text.primary} hover:${themeClasses.bg.hover} transition-colors first:rounded-t-lg last:rounded-b-lg`}
-                        whileHover={{ x: 4 }}
-                      >
-                        <div className={`p-1.5 rounded-md bg-gradient-to-r ${type.color}`}>
-                          {type.icon}
-                        </div>
-                        <span className="font-medium">{type.label}</span>
-                      </motion.button>
-                    ))}
-                  </motion.div>
-                )}
-              </div>
-            </div>
-
-            {/* Email Input */}
-            <div>
-              <label className={`block text-sm font-medium ${themeClasses.text.primary} mb-2`}>
-                Email Address
-              </label>
-              <div className="relative">
-                <Mail className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 ${themeClasses.text.secondary}`} />
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className={`w-full pl-10 pr-4 py-3 ${themeClasses.bg.secondary} ${themeClasses.border.primary} border rounded-lg ${themeClasses.text.primary} placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 ${isDark ? 'focus:ring-blue-500' : 'focus:ring-green-500'} transition-all`}
-                  placeholder="john@example.com"
-                />
-              </div>
-              {errors.email && (
-                <motion.p 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="mt-2 text-sm text-red-500"
-                >
-                  {errors.email}
-                </motion.p>
-              )}
-            </div>
-
-            {/* Phone Input */}
+                {/* Phone Input */}
             <div>
               <label className={`block text-sm font-medium ${themeClasses.text.primary} mb-2`}>
                 Phone Number
@@ -883,36 +771,37 @@ export const Signinpage = () => {
           </form>
 
           {/* Sign In Link */}
-          <div className="mt-6 text-center">
-            <p className={`text-sm ${themeClasses.text.secondary}`}>
-              Already have an account?{' '}
-              <Link 
-                to="/login"
-                className={`font-medium ${themeClasses.text.accent} hover:underline transition-colors`}
-              >
-                Sign in here
-              </Link>
-            </p>
-          </div>
-        </motion.div>
+              <div className="mt-6 text-center">
+                <p className={`text-sm ${themeClasses.text.secondary}`}>
+                  Already have an account?{' '}
+                  <Link 
+                    to="/login"
+                    className={`font-medium ${themeClasses.text.accent} hover:underline transition-colors`}
+                  >
+                    Sign in here
+                  </Link>
+                </p>
+              </div>
 
-        {/* Back to Home */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-center mt-6"
-        >
-          <Link 
-            to="/"
-            className={`text-sm ${themeClasses.text.secondary} hover:${themeClasses.text.primary} transition-colors`}
-          >
-            ← Back to Home
-          </Link>
-        </motion.div>
+              {/* Back to Home */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="text-center mt-6 mb-8"
+              >
+                <Link 
+                  to="/"
+                  className={`text-sm ${themeClasses.text.secondary} hover:${themeClasses.text.primary} transition-colors`}
+                >
+                  ← Back to Home
+                </Link>
+              </motion.div>
+            </motion.div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-);
+  );
 };

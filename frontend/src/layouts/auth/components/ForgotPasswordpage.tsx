@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { 
@@ -16,9 +16,10 @@ import { useThemeContext } from "../../../theme/useTheme";
 import FloatingElements from "../../../components/FloatingElements";
 
 export const ForgotPasswordpage = () => {
-  const [email, setEmail] = useState('');
+  const emailRef = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isEmailSent, setIsEmailSent] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState(''); // Store submitted email for display
   const [error, setError] = useState('');
 
   const themeClasses = useThemeClasses();
@@ -30,6 +31,8 @@ export const ForgotPasswordpage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    const email = emailRef.current?.value || '';
     
     if (!email) {
       setError('Email is required');
@@ -47,12 +50,14 @@ export const ForgotPasswordpage = () => {
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
+      setSubmittedEmail(email); // Store the email for display
       setIsEmailSent(true);
       console.log('Password reset email sent to:', email);
     }, 2000);
   };
 
   const handleResendEmail = () => {
+    const email = emailRef.current?.value || '';
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
@@ -100,7 +105,7 @@ export const ForgotPasswordpage = () => {
             <p className={`${themeClasses.text.secondary} mb-8 leading-relaxed`}>
               We've sent a password reset link to{' '}
               <span className={`font-medium ${themeClasses.text.primary}`}>
-                {email}
+                {submittedEmail}
               </span>
               . Please check your inbox and follow the instructions to reset your password.
             </p>
@@ -221,12 +226,10 @@ export const ForgotPasswordpage = () => {
               <div className="relative">
                 <Mail className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 ${themeClasses.text.secondary}`} />
                 <input
+                  ref={emailRef}
                   type="email"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                    setError('');
-                  }}
+                  name="email"
+                  onChange={() => setError('')}
                   className={`w-full pl-10 pr-4 py-3 ${themeClasses.bg.secondary} ${themeClasses.border.primary} border rounded-lg ${themeClasses.text.primary} placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 ${isDark ? 'focus:ring-blue-500' : 'focus:ring-green-500'} transition-all`}
                   placeholder="Enter your email address"
                   autoFocus

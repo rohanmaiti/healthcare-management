@@ -2,6 +2,15 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import toast from 'react-hot-toast';
 import axiosInstance from "../../lib/axios";
 
+interface ApiError {
+  response?: {
+    data?: {
+      message?: string;
+    };
+  };
+  message?: string;
+}
+
 interface User {
   id: string;
   email: string;
@@ -18,7 +27,7 @@ interface User {
 interface AuthState {
   authUser: User | null;
   isLoading: boolean;
-  authError: any | null;
+  authError: string | null;
 }
 
 interface LoginCredentials {
@@ -35,36 +44,39 @@ export const login = createAsyncThunk<
   try {
     const res = await axiosInstance.post("/auth/v1/login", data);
     return res.data;
-  } catch (error: unknown) {
-    return rejectWithValue(error?.response?.data || "login failded");
+  } catch (error) {
+    const apiError = error as ApiError;
+    return rejectWithValue(apiError?.response?.data?.message || apiError?.message || "Login failed");
   }
 });
 
-export const signup = createAsyncThunk('/auth/signup', async (data, { rejectWithValue }) => {
+export const signup = createAsyncThunk('/auth/signup', async (data: unknown, { rejectWithValue }) => {
     try {
         const res = await axiosInstance.post('/auth/v1/signup', data);
         return res.data;
     } catch (error) {
-        return rejectWithValue(error?.response?.message);
+        const apiError = error as ApiError;
+        return rejectWithValue(apiError?.response?.data?.message || apiError?.message || "Signup failed");
     }
 })
 
-export const logout = createAsyncThunk('/auth/logout', (data, {rejectWithValue}) => {
+export const logout = createAsyncThunk('/auth/logout', async (_, {rejectWithValue}) => {
     try {
-        const res = axiosInstance.post('/auth/v1/logout');
+        const res = await axiosInstance.post('/auth/v1/logout');
         return res.data;
     } catch (error) {
-        return rejectWithValue(error?.response?.message);
+        const apiError = error as ApiError;
+        return rejectWithValue(apiError?.response?.data?.message || apiError?.message || "Logout failed");
     }
 })
 
-const authSlice = createSlice<any>({
+const authSlice = createSlice({
   name: "authSlice",
   initialState: {
     authUser: null,
     isLoading: false,
     authError: null,
-  },
+  } as AuthState,
   reducers: {
     clearError: (state:AuthState) => {
         state.authError = null;
@@ -80,8 +92,8 @@ const authSlice = createSlice<any>({
         toast.success('Logged in');
     })
     .addCase(login?.rejected, (state, action) => {
-        state.authError = action.payload;
-        toast.error(state?.authError?.message);
+        state.authError = action.payload || "Login failed";
+        toast.error(state.authError);
         state.isLoading = false;
     })
     .addCase(signup.pending, (state) => {
@@ -93,17 +105,16 @@ const authSlice = createSlice<any>({
         toast.success('Signed in');
     })
     .addCase(signup.rejected, (state, action) => {
-        state.authError = action?.payload;
+        state.authError = (action.payload as string) || "Signup failed";
         state.isLoading = false;
-        toast.error(state.authUser?.message);
-
+        toast.error(state.authError);
     })
     .addCase(logout.fulfilled, (state) => {
         state.authUser = null;
         toast.success('Logged out');
     })
-    addCase(logout.rejected, (state, action ) => {
-        toast.error(action?.payload?.message);
+    .addCase(logout.rejected, (_, action) => {
+        toast.error((action.payload as string) || "Logout failed");
     })
   }
 });

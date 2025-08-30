@@ -1,10 +1,15 @@
 
 import {
-  Home,
+  LayoutDashboard,
   Users,
-  Heart,
   Calendar,
   Settings,
+  HousePlus,
+  ClipboardPlus,
+  Bed,
+  NotebookPen,
+  Mail,
+  MessageCirclePlus
 
 } from "lucide-react";
 interface MenuItem {
@@ -18,7 +23,7 @@ interface MenuItem {
   {
     id: "dashboard",
     label: "Dashboard",
-    icon: Home,
+    icon: LayoutDashboard,
     route: '/hospital-admin/dashboard'
   },
   {
@@ -30,20 +35,38 @@ interface MenuItem {
    {
     id: "departments",
     label: "Departments",
-    icon: Calendar,
+    icon: HousePlus,
     route: '/hospital-admin/departments'
   },
   {
     id: "opd",
     label: "OPD",
-    icon: Heart,
+    icon: ClipboardPlus,
     route: '/hospital-admin/opd'
   },
   {
     id: "patients",
     label: "Patients",
-    icon: Calendar,
+    icon:   Bed,
     route: '/hospital-admin/patients'
+  },
+  {
+    id: "notes",
+    label: "Notes",
+    icon: NotebookPen,
+    route: '/hospital-admin/notes'
+  },
+  {
+    id: "mail",
+    label: "Mail",
+    icon: Mail,
+    route: '/hospital-admin/mail'
+  },
+  {
+    id: "messages",
+    label: "Messages",
+    icon: MessageCirclePlus,
+    route: '/hospital-admin/message'
   },
   {
     id: "settings",

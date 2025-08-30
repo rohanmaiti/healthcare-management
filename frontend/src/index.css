@@ -60,6 +60,8 @@ html {
   background: rgba(75, 85, 99, 0.7);
 }
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* Animation for gradient text */
 @keyframes gradient-x {
   0%, 100% {

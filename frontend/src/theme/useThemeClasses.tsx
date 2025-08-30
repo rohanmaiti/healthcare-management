@@ -28,6 +28,7 @@ const useThemeClasses = () => {
       secondary: isDark ? 'text-slate-300' : 'text-gray-600',
       muted: isDark ? 'text-slate-400' : 'text-gray-500',
       accent: isDark ? 'text-blue-400' : 'text-green-600',
+      cardChange: isDark ? 'text-black' : 'text-gray-700',
     },
     // border classes
     border: {

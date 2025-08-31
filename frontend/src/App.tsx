@@ -22,7 +22,7 @@ function App() {
   useEffect(() => {
     try {
       dispatch(check());
-    } catch (error) {
+    } catch (error:any) {
       console.log(error?.message);      
     }
   }, []);

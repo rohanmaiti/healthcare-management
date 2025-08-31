@@ -7,12 +7,12 @@ import {
 import useThemeClasses from "../../theme/useThemeClasses";
 import FloatingElements from "../../components/FloatingElements";
 import LoadingScreen from "../../components/LoadingScreen";
-import { authUser } from "./test.authuser";
 import useAuth from "./useAuth";
 import { features, userTypes } from "./contants";
 import { Navbar } from "./components/Navbar";
 import { Herosection } from "./components/Herosection";
 import { Footer } from "./components/Footer";
+import { useAppSelector } from "../../store/hooks";
 
 export const Landingpage = () => {
   const themeClasses = useThemeClasses();
@@ -21,6 +21,8 @@ export const Landingpage = () => {
     isLoading,
     scrollToTop,
   } = useAuth();
+
+   const { authUser } = useAppSelector((store) => store.authReducer);
 
   if (isLoading) {
     return <LoadingScreen />;

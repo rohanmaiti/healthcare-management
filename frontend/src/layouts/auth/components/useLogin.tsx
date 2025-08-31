@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { login } from "../../../store/slices/auth.slice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 
@@ -12,6 +13,7 @@ export const useLogin = () => {
   const [selectedUserTypeValue, setSelectedUserTypeValue] = useState("user");
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { isLoading } = useAppSelector((state) => state.authReducer);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,8 +61,14 @@ export const useLogin = () => {
       userType: selectedUserTypeValue,
     };
 
-    dispatch(login(formData));
-
+    try {
+      const result = await dispatch(login(formData));
+      if (login.fulfilled.match(result)) {
+        navigate(`/${result.payload.userType}`);
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
   };
   return {
     // Input refs

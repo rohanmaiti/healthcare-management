@@ -1,13 +1,12 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { authUser } from "../test.authuser";
+import { useAppSelector } from "../../../store/hooks";
 
 export const HospitalAdminProtected = () => {
+  const { authUser } = useAppSelector((store) => store.authReducer);
 
-  if (!authUser || authUser?.userType != 'hospital-admin') {
-    return <Navigate to={'/login'} />
+  if (!authUser || authUser?.userType != "hospital-admin") {
+    return <Navigate to={"/login"} />;
   }
-  
-  return <Outlet />;
 
-  
+  return <Outlet />;
 };

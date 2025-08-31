@@ -2,6 +2,8 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, Heart, User, LogOut } from "lucide-react";
 import { menuItems } from "../constants";
 import useThemeClasses from "../../../theme/useThemeClasses";
+import { useAppDispatch } from "../../../store/hooks";
+import { logout } from "../../../store/slices/auth.slice";
 
 interface SidebarProps {
   sidebarExpanded: boolean;
@@ -22,6 +24,10 @@ const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const location = useLocation();
   const themeClasses = useThemeClasses();
+  const dispatch = useAppDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+  }
 
   return (
     <div
@@ -165,6 +171,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               </button>
               <button
                 className={`w-full flex items-center px-3 py-2 text-sm transition-colors ${themeClasses.button.ghost}`}
+                onClick={handleLogout}
               >
                 <LogOut className="h-4 w-4 mr-2" />
                 Logout

@@ -2,8 +2,8 @@ import React, { useRef, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { signup } from '../../../store/slices/auth.slice';
 
-export const useSignin = () => {
-      const firstNameRef = useRef<HTMLInputElement>(null);
+export const useSignup = () => {
+  const firstNameRef = useRef<HTMLInputElement>(null);
   const lastNameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
@@ -138,26 +138,37 @@ export const useSignin = () => {
    
     // Collect form data from refs
     const formData = {
+      userInfo: {
       firstName: firstNameRef.current?.value || '',
       lastName: lastNameRef.current?.value || '',
       email: emailRef.current?.value || '',
       phone: phoneRef.current?.value || '',
-      password: passwordRef.current?.value || '',
-      confirmPassword: confirmPasswordRef.current?.value || '',
+      password: passwordRef.current?.value || '', 
       userType: selectedUserTypeValue,
-      agreeToTerms: agreeToTermsRef.current?.checked || false,
+      },
+
       // Hospital Admin specific fields
+      hospitalInfo: {
       hospitalName: hospitalNameRef.current?.value || '',
-      hospitalLocation: hospitalLocationRef.current?.value || '',
+      hospitalAddress: hospitalLocationRef.current?.value || '',
       registrationNumber: registrationNumberRef.current?.value || '',
       hospitalType: hospitalTypeRef.current?.value || 'private',
       hospitalEmail: hospitalEmailRef.current?.value || '',
       hospitalPhone1: hospitalPhone1Ref.current?.value || '',
       hospitalPhone2: hospitalPhone2Ref.current?.value || ''
+      }
     };
-
-    dispatch(signup(formData));
-    
+    let payload = {};
+    if ( formData.userInfo?.userType === 'user' ) {
+      payload = formData.userInfo;
+    }
+    else {
+      payload = {
+        ...formData.userInfo,
+        hospitalInfo: formData?.hospitalInfo
+      }
+    }
+    dispatch(signup(payload));
   };
 
   return {

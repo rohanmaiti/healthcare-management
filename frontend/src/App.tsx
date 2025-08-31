@@ -4,15 +4,30 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import useThemeClasses from "./theme/useThemeClasses";
 import { Landingpage } from "./layouts/auth/Landingpage";
 import { Loginpage } from "./layouts/auth/components/Loginpage";
-import { Signinpage } from "./layouts/auth/components/Signinpage";
+import { Signuppage } from "./layouts/auth/components/Signuppage";
 import { ForgotPasswordpage } from "./layouts/auth/components/ForgotPasswordpage";
 import { IfnotLogin } from "./layouts/auth/protectedRoutes/IfnotLogin";
 import { HospitalAdminProtected } from "./layouts/auth/protectedRoutes/HospitalAdminProtected";
 import { Dashboard } from "./screens/hospital-admin/components/Dashboard";
 import { Toaster } from "react-hot-toast";
 import FaviconGenerator from "./components/FaviconGenerator";
+import { useEffect } from "react";
+import { check } from "./store/slices/auth.slice";
+import { useAppDispatch } from "./store/hooks";
 
 function App() {
+  const dispatch = useAppDispatch();
+
+
+  useEffect(() => {
+    try {
+      dispatch(check());
+    } catch (error) {
+      console.log(error?.message);      
+    }
+  }, []);
+
+
   return (
     <>
       <FaviconGenerator />
@@ -21,7 +36,7 @@ function App() {
 
         <Route element={<IfnotLogin />}>
           <Route path="/login" element={<Loginpage />} />
-          <Route path="/signup" element={<Signinpage />} />
+          <Route path="/signup" element={<Signuppage />} />
           <Route path="/forgot-password" element={<ForgotPasswordpage />} />
         </Route>
 
@@ -36,8 +51,6 @@ function App() {
             <Route path="settings" element={<Settings />} />
           </Route>
         </Route>
-
-        
       </Routes>
       <Toaster />
     </>

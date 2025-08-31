@@ -4,6 +4,8 @@ import { Menu, Bell, Sun, Moon, User, LogOut } from "lucide-react";
 import { menuItems } from "../constants";
 import useThemeClasses from "../../../theme/useThemeClasses";
 import ThemeContext from "../../../theme/context";
+import { useAppDispatch } from "../../../store/hooks";
+import { logout } from "../../../store/slices/auth.slice";
 
 interface TopbarProps {
   openMobileMenu: () => void;
@@ -19,6 +21,11 @@ const Topbar: React.FC<TopbarProps> = ({
   const location = useLocation();
   const themeClasses = useThemeClasses();
   const themeContext = useContext(ThemeContext);
+  
+  const dispatch = useAppDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+  };
 
   if (!themeContext) {
     throw new Error("Topbar must be used within a ThemeProvider");
@@ -26,7 +33,9 @@ const Topbar: React.FC<TopbarProps> = ({
 
   const { toggleTheme, isDark } = themeContext;
 
-  const currentMenuItem = menuItems.find((item) => item.route === location.pathname);
+  const currentMenuItem = menuItems.find(
+    (item) => item.route === location.pathname
+  );
 
   return (
     <header
@@ -82,9 +91,7 @@ const Topbar: React.FC<TopbarProps> = ({
 
             {profileMenuOpen && (
               <div
-                className={`absolute top-full right-0 mt-2 w-48 rounded-lg shadow-lg py-1 ${
-                  themeClasses.bg.card
-                } ${themeClasses.border.primary} border`}
+                className={`absolute top-full right-0 mt-2 w-48 rounded-lg shadow-lg py-1 ${themeClasses.bg.card} ${themeClasses.border.primary} border`}
               >
                 <button
                   className={`w-full flex items-center px-3 py-2 text-sm transition-colors ${themeClasses.button.ghost}`}
@@ -94,6 +101,7 @@ const Topbar: React.FC<TopbarProps> = ({
                 </button>
                 <button
                   className={`w-full flex items-center px-3 py-2 text-sm transition-colors ${themeClasses.button.ghost}`}
+                  onClick={handleLogout}
                 >
                   <LogOut className="h-4 w-4 mr-2" />
                   Logout

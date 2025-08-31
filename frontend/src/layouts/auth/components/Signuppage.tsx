@@ -21,7 +21,7 @@ import {
 import useThemeClasses from "../../../theme/useThemeClasses";
 import { useThemeContext } from "../../../theme/useTheme";
 import FloatingElements from "../../../components/FloatingElements";
-import { useSignin } from "./useSignin";
+import { useSignup } from "./useSignup";
 
 const userTypes = [
   {
@@ -39,7 +39,7 @@ const userTypes = [
   // { value: 'doctor', label: 'Doctor', icon: <Stethoscope className="w-4 h-4" />, color: 'from-blue-500 to-cyan-500' }, // future scope
 ];
 
-export const Signinpage = () => {
+export const Signuppage = () => {
   // Use the custom hook for all form logic
   const {
     firstNameRef,
@@ -68,7 +68,7 @@ export const Signinpage = () => {
     handleInputChange,
     handleUserTypeSelect,
     handleSubmit,
-  } = useSignin();
+  } = useSignup();
 
   const themeClasses = useThemeClasses();
   const { toggleTheme, isDark } = useThemeContext();

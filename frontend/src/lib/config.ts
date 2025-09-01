@@ -19,7 +19,7 @@ const config = {
   getApiUrl: () => {
     // If we're in production or the hostname is not localhost
     if (import.meta.env.PROD || !window.location.hostname.includes('localhost')) {
-      return import.meta.env.VITE_API_BASE_URL || 'https://your-render-backend.onrender.com/api';
+      return import.meta.env.VITE_API_BASE_URL || 'https://hospital-manager-backend.onrender.com/api';
     }
     return 'http://localhost:4000/api';
   },

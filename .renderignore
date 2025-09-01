@@ -1,0 +1,27 @@
+# Files and directories to ignore during Render deployment
+# This helps reduce deployment size and time
+
+# Frontend directory (not needed for backend deployment)
+frontend/
+
+# Documentation
+*.md
+docs/
+
+# Development files
+.vscode/
+.idea/
+*.log
+.DS_Store
+
+# Git
+.git/
+.gitignore
+
+# Scripts (unless needed for deployment)
+deploy-setup.sh
+verify-setup.sh
+
+# Environment files (handled separately)
+.env*
+!.env.example

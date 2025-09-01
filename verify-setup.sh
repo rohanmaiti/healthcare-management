@@ -39,6 +39,8 @@ echo "Project files:"
 echo "  📖 DEPLOYMENT.md: $([ -f DEPLOYMENT.md ] && echo "✅" || echo "❌")"
 echo "  🚀 deploy-setup.sh: $([ -f deploy-setup.sh ] && echo "✅" || echo "❌")"
 echo "  🚫 .gitignore: $([ -f .gitignore ] && echo "✅" || echo "❌")"
+echo "  🏗️  render.yaml: $([ -f render.yaml ] && echo "✅" || echo "❌")"
+echo "  🚫 .renderignore: $([ -f .renderignore ] && echo "✅" || echo "❌")"
 
 echo ""
 echo "Environment variables check:"

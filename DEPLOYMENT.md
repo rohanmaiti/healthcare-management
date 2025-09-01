@@ -23,9 +23,52 @@ Make sure your latest backend code is pushed to GitHub with all the new environm
    - **Environment**: `Node`
    - **Region**: Choose closest to your users
    - **Branch**: `main` (or your default branch)
-   - **Root Directory**: `backend`
+   - **Root Directory**: `backend` ⚠️ **IMPORTANT: Set this to `backend`**
    - **Build Command**: `npm install`
    - **Start Command**: `npm start`
+
+### Alternative: Use render.yaml (Recommended for Monorepo)
+
+Since your frontend and backend are in the same repository, you can use the included `render.yaml` file:
+
+1. Go to [Render Dashboard](https://dashboard.render.com/)
+2. Click "New +" → "Blueprint"
+3. Connect your GitHub repository
+4. Render will automatically detect the `render.yaml` file
+5. Review the configuration and click "Apply"
+
+This approach is better because:
+- It's infrastructure as code
+- Automatically configures the root directory
+- Can be version controlled
+- Easier to manage multiple services
+
+## Monorepo Deployment Strategy
+
+Since your frontend and backend are in the same repository, here are the deployment approaches:
+
+### Option 1: Using render.yaml (Recommended)
+This project includes a `render.yaml` file that tells Render to:
+- Only build and deploy the `backend` directory
+- Use the correct build and start commands
+- Set up environment variables
+
+### Option 2: Manual Configuration
+If you prefer manual setup:
+1. When creating the service, set **Root Directory** to `backend`
+2. This tells Render to treat the `backend` folder as the application root
+3. All commands will run relative to the `backend` directory
+
+### Why This Works
+- Render will `cd` into the `backend` directory before running commands
+- `npm install` will use `backend/package.json`
+- `npm start` will run the start script from `backend/package.json`
+- Only backend files are deployed, keeping the deployment size small
+
+### Deployment Triggers
+- **Backend**: Deploys when ANY file in the repository changes (including frontend)
+- **Frontend**: Vercel deploys when ANY file changes
+- Consider using GitHub Actions for more granular control if needed
 
 ### Step 3: Environment Variables
 

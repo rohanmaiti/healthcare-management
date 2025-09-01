@@ -3,20 +3,18 @@ services:
     name: hospital-manager-backend
     env: node
     plan: free
+    # Specify the backend directory as the root for this service
+    rootDir: backend
     buildCommand: npm install
     startCommand: npm start
+    # Specify Node.js version (optional)
+    runtime: node
     envVars:
       - key: NODE_ENV
         value: production
       - key: JWT_SECRET
         generateValue: true
       - key: MONGO_URI
-        fromService:
-          type: web
-          name: hospital-manager-backend
-          property: MONGO_URI
+        sync: false
       - key: FRONTEND_URL
-        fromService:
-          type: web
-          name: hospital-manager-backend
-          property: FRONTEND_URL
+        sync: false

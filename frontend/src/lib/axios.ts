@@ -1,8 +1,7 @@
 import axios from 'axios';
-import config from './config';
 
 const axiosInstance = axios.create({
-    baseURL: config.API_BASE_URL,
+    baseURL: 'http://localhost:4000/api',
     withCredentials: true  // This enables cookies for all requests
 });
 

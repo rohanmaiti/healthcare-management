@@ -79,6 +79,35 @@ VITE_APP_ENV=development
 
 ## 🚀 Production Deployment
 
+For detailed deployment instructions, see [DEPLOYMENT.md](DEPLOYMENT.md).
+
+### Quick Deployment Steps
+
+1. **Setup Environment Variables**
+   ```bash
+   ./deploy-setup.sh
+   ```
+
+2. **Verify Setup**
+   ```bash
+   ./verify-setup.sh
+   ```
+
+3. **Deploy Backend to Render**
+   - Connect GitHub repository to Render
+   - Configure environment variables
+   - Deploy automatically on push
+
+4. **Deploy Frontend to Vercel**
+   - Already configured (based on your setup)
+   - Updates automatically on push
+
+### Environment Configuration
+
+- **Development**: Uses localhost URLs
+- **Production**: Auto-detects and uses production URLs
+- **CORS**: Configured for both environments
+
 1. **Update Environment Variables**
    - Update `backend/.env.production` with production URLs
    - Update `frontend/.env.production` with production API URL

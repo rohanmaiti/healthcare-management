@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: hospital-manager-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: MONGO_URI
+        fromService:
+          type: web
+          name: hospital-manager-backend
+          property: MONGO_URI
+      - key: FRONTEND_URL
+        fromService:
+          type: web
+          name: hospital-manager-backend
+          property: FRONTEND_URL

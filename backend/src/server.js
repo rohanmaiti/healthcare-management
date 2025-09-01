@@ -14,7 +14,7 @@ import { connectToDB } from "./lib/db.js";
 import authRoutes from './routes/auth.route.js'
 
 const PORT = process.env.PORT || 4001;
-const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3001";
+const FRONTEND_URL = process.env.FRONTEND_URL || "https://healthcare-management-git-main-rohanmaitis-projects.vercel.app/";
 
 const app = express();
 
@@ -31,6 +31,7 @@ const corsOptions = {
       FRONTEND_URL,
       'http://localhost:3001',
       'http://localhost:3000',
+      'https://healthcare-management-git-main-rohanmaitis-projects.vercel.app'
       // Add your Vercel domain here when you get it
     ];
     

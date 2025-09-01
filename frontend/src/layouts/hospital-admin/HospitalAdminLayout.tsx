@@ -37,7 +37,7 @@ const HospitalAdminLayout = () => {
         {/* Main Content Area - Adjusted for fixed sidebar */}
         <div
           className={`flex-1 flex flex-col min-h-screen ${
-            sidebarExpanded ? "lg:ml-64" : "lg:ml-16"
+            sidebarExpanded ? "md:ml-64" : "md:ml-16"
           } transition-all duration-300`}
         >
           {/* Header - Sticky positioning */}

@@ -31,14 +31,15 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <div
+      
       className={`flex flex-col transition-all duration-300 min-h-screen ${
         themeClasses.bg.sidebar
       } ${themeClasses.border.primary} ${
         sidebarExpanded ? "w-64" : "w-16"
       } ${
         mobileMenuOpen
-          ? "fixed inset-y-0 left-0 z-50"
-          : "hidden lg:flex lg:fixed lg:top-0 lg:left-0 lg:h-full lg:z-40"
+          ? "fixed inset-y-0 left-0 z-50 md:hidden"
+          : "hidden md:flex md:fixed md:top-0 md:left-0 md:h-full md:z-40"
       }`}
     >
       {/* Menu Toggle Section */}
@@ -59,6 +60,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
         {/* Menu toggle button */}
         <button
+          data-sidebar-toggle
           onClick={toggleSidebar}
           className={`p-2 rounded-lg transition-colors group ${
             themeClasses.button.ghost

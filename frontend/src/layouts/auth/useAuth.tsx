@@ -5,7 +5,7 @@ const useAuth = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
    useEffect(() => {
       const handleScroll = () => {
@@ -17,13 +17,7 @@ const useAuth = () => {
       return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    useEffect(() => {
-    // Simulate loading time
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
+  
 
     const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });

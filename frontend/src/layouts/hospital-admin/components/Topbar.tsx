@@ -45,8 +45,9 @@ const Topbar: React.FC<TopbarProps> = ({
         <div className="flex items-center space-x-3">
           {/* Mobile menu button */}
           <button
+            data-sidebar-toggle
             onClick={openMobileMenu}
-            className={`lg:hidden p-2 rounded-lg transition-colors ${themeClasses.button.ghost}`}
+            className={`md:hidden p-2 rounded-lg transition-colors ${themeClasses.button.ghost}`}
           >
             <Menu className="h-5 w-5" />
           </button>
@@ -80,8 +81,8 @@ const Topbar: React.FC<TopbarProps> = ({
             </div>
           </button>
 
-          {/* Profile Menu (Mobile) */}
-          <div className="lg:hidden relative" data-profile-menu>
+          {/* profile Menu (Mobile only) */}
+          <div className="md:hidden relative" data-profile-menu>
             <button
               onClick={toggleProfileMenu}
               className={`w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-semibold ${themeClasses.accent.primary}`}

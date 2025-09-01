@@ -1,49 +1,13 @@
-import { useThemeClasses, useThemeContext } from '../../../theme';
-import { Users, Heart, Calendar, DollarSign } from 'lucide-react';
+import { useThemeClasses } from '../../../theme';
+import { QuickActionsComp } from './QuickActionsComp';
+import { StatsCardsComp } from './StatsCardsComp';
+
 
 export const Dashboard = () => {    
   const themeClasses = useThemeClasses();
-  const { isDark } = useThemeContext();
+ 
   
-  const statsCards = [
-    {
-      title: 'Total Revenue',
-      value: '$125,430',
-      change: '+15% from last month',
-      icon: DollarSign,
-      bgColor: 'bg-green-50',
-      iconColor: 'text-green-600',
-      changeColor: 'bg-green-100'
-    },
-    {
-      title: 'Total Patients',
-      value: '1,234',
-      change: '+12% from last month',
-      icon: Users,
-      bgColor: 'bg-blue-50',
-      iconColor: 'text-blue-600',
-      changeColor: 'bg-blue-100'
-    },
-    {
-      title: 'Active Staff',
-      value: '89',
-      change: '+3 new this week',
-      icon: Heart,
-      bgColor: 'bg-purple-50',
-      iconColor: 'text-purple-600',
-      changeColor: 'bg-purple-100'
-    },
-    {
-      title: "Today's Appointments",
-      value: '45',
-      change: '8 pending',
-      icon: Calendar,
-      bgColor: 'bg-orange-50',
-      iconColor: 'text-orange-600',
-      changeColor: 'bg-orange-100'
-    }
-  ];
-
+ 
   const recentActivities = [
     {
       message: 'New patient registered: John Doe',
@@ -78,85 +42,18 @@ export const Dashboard = () => {
         </div>
       </div>
 
-      {/* Stats Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {statsCards.map((card, index) => {
-          const IconComponent = card.icon;
-          return (
-            <div
-              key={index}
-              className={`
-                rounded-xl shadow-sm border transition-all duration-200 overflow-hidden
-                hover:shadow-md hover:scale-105 cursor-pointer
-                ${themeClasses.bg.card} ${themeClasses.border.primary}
-              `}
-            >
-              {/* White Top Section */}
-              <div className={`p-6 ${themeClasses.bg.card}`}>
-                <div className="flex items-center justify-between">
-                  <div className="space-y-2">
-                    <h3 className={`text-sm font-medium uppercase tracking-wide ${themeClasses.text.secondary}`}>
-                      {card.title}
-                    </h3>
-                    <p className={`text-2xl font-bold ${themeClasses.text.primary}`}>
-                      {card.value}
-                    </p>
-                  </div>
-                  <div className={`
-                    p-3 rounded-lg transition-transform duration-200
-                    hover:scale-110 ${card.bgColor}
-                  `}>
-                    <IconComponent className={`h-6 w-6 ${card.iconColor}`} />
-                  </div>
-                </div>
-              </div>
-              
-              {/* Colored Bottom Section */}
-              <div className={`bottom-0 px-6 py-3 ${card.changeColor}`}>
-                <p className={`text-xs font-medium ${themeClasses.text.cardChange}`}>
-                  {card.change}
-                </p>
-              </div>
-            </div>
-          );
-        })}
+      {/* stats cards grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <StatsCardsComp/>
       </div>
 
 
-       {/* Quick Actions */}
+       {/* quick actions */}
       <div className={`
         rounded-xl shadow-sm border p-6 transition-shadow duration-200
         hover:shadow-md ${themeClasses.bg.card} ${themeClasses.border.primary}
       `}>
-        <h3 className={`text-lg font-semibold ${themeClasses.text.primary} mb-4`}>
-          Quick Actions
-        </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {[
-            { label: 'Add Department', action: 'Add new department to system' },
-            { label: 'Inventory Status', action: 'See medicine, inventory stocks' },
-            { label: 'Schedule OPD', action: 'Assign doctors in OPD duty' },
-            { label: 'Generate Report', action: 'Create monthly report' }
-          ].map((action, index) => (
-            <button
-              key={index}
-              className={`
-                ${isDark? 'dark' : ''}
-                p-4 text-left rounded-lg border transition-all duration-200
-                hover:shadow-md hover:bg-amber-50 dark:hover:bg-slate-600 focus:outline-none 
-                cursor-pointer
-                ${themeClasses.bg.secondary} ${themeClasses.border.primary}
-              `}
-            >
-              <div className={`font-medium ${themeClasses.text.primary} mb-1`}>
-                {action.label}
-              </div>
-              <div className={`text-sm ${themeClasses.text.muted}`}>
-                {action.action}
-              </div>
-            </button>
-          ))}
-        </div>
+        <QuickActionsComp/>
       </div>
 
       {/* Recent Activity Section */}

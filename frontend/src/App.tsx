@@ -48,6 +48,7 @@ function App() {
             <Route path="settings" element={<Settings />} />
           </Route>
         </Route>
+        <Route path='*' element={<h1> 404 not found </h1>} />
       </Routes>
       <Toaster />
     </>

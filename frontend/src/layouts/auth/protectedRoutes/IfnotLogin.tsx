@@ -14,7 +14,7 @@ export const IfnotLogin = () => {
     return <Navigate to={`/${authUser.userType}`} replace />;
   }
 
-  if (authUser && location.pathname !== "/") {
+  if (authUser && ["/login", "/signup", "/forgot-password"].includes(location.pathname)) {
     return <Navigate to={`/${authUser.userType}`} replace />;
   }
   

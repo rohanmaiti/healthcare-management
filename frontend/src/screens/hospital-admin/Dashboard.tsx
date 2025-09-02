@@ -1,6 +1,6 @@
-import { useThemeClasses } from '../../../theme';
-import { QuickActionsComp } from './QuickActionsComp';
-import { StatsCardsComp } from './StatsCardsComp';
+import { useThemeClasses } from '../../theme';
+import { QuickActionsComp } from './components/QuickActionsComp';
+import { StatsCardsComp } from './components/StatsCardsComp';
 
 
 export const Dashboard = () => {    

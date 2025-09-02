@@ -2,7 +2,7 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAppSelector } from "../../../store/hooks";
 import LoadingScreen from "../../../components/LoadingScreen";
 
-export const IfnotLogin = () => {
+export const ReceptionistProtected = () => {
   const { authUser, isLoading } = useAppSelector((store) => store.authReducer);
   const location = useLocation();
 
@@ -10,13 +10,9 @@ export const IfnotLogin = () => {
     return <LoadingScreen />;
   }
 
-  if (authUser && location.pathname === "/") {
-    return <Navigate to={`/${authUser.userType}`} replace />;
+  if (!authUser || authUser?.userType !== "receptionist") {
+    return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  if (authUser && location.pathname !== "/") {
-    return <Navigate to={`/${authUser.userType}`} replace />;
-  }
-  
   return <Outlet />;
 };

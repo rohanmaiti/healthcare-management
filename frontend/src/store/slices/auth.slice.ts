@@ -108,7 +108,7 @@ const authSlice = createSlice({
   name: "authSlice",
   initialState: {
     authUser: null,
-    isLoading: false,
+    isLoading: true, // always start with loading true to prevent the protected routes to make route discition before auth check
     authError: null,
   } as AuthState,
   reducers: {

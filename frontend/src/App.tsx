@@ -8,7 +8,7 @@ import { Signuppage } from "./layouts/auth/components/Signuppage";
 import { ForgotPasswordpage } from "./layouts/auth/components/ForgotPasswordpage";
 import { IfnotLogin } from "./layouts/auth/protectedRoutes/IfnotLogin";
 import { HospitalAdminProtected } from "./layouts/auth/protectedRoutes/HospitalAdminProtected";
-import { Dashboard } from "./screens/hospital-admin/components/Dashboard";
+import { Dashboard } from "./screens/hospital-admin/Dashboard";
 import { Toaster } from "react-hot-toast";
 import FaviconGenerator from "./components/FaviconGenerator";
 import { useEffect } from "react";
@@ -18,29 +18,26 @@ import { useAppDispatch } from "./store/hooks";
 function App() {
   const dispatch = useAppDispatch();
 
-
   useEffect(() => {
     try {
       dispatch(check());
-    } catch (error:any) {
-      console.log(error?.message);      
+    } catch (error: any) {
+      console.log(error?.message);
     }
   }, []);
-
 
   return (
     <>
       <FaviconGenerator />
       <Routes>
-        <Route path="/" element={<Landingpage />} />
-
         <Route element={<IfnotLogin />}>
+          <Route path="/" element={<Landingpage />} />
           <Route path="/login" element={<Loginpage />} />
           <Route path="/signup" element={<Signuppage />} />
           <Route path="/forgot-password" element={<ForgotPasswordpage />} />
         </Route>
 
-        <Route path="/" element={<HospitalAdminProtected />}>
+        <Route element={<HospitalAdminProtected />}>
           <Route path="/hospital-admin" element={<HospitalAdminLayout />}>
             <Route index element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={<Dashboard />} />
@@ -56,21 +53,6 @@ function App() {
     </>
   );
 }
-
-// Placeholder components - you can replace these with your actual components
-// const Dashboard = () => {
-//   const themeClasses = useThemeClasses();
-//   return (
-//     <div className="p-6">
-//       <h1 className={`text-2xl font-bold mb-4 ${themeClasses.text.primary}`}>
-//         Dashboard
-//       </h1>
-//       <p className={themeClasses.text.secondary}>
-//         Welcome to the Hospital Admin Dashboard
-//       </p>
-//     </div>
-//   );
-// };
 
 const Employees = () => {
   const themeClasses = useThemeClasses();

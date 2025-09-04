@@ -8,12 +8,13 @@ import { Signuppage } from "./layouts/auth/components/Signuppage";
 import { ForgotPasswordpage } from "./layouts/auth/components/ForgotPasswordpage";
 import { IfnotLogin } from "./layouts/auth/protectedRoutes/IfnotLogin";
 import { HospitalAdminProtected } from "./layouts/auth/protectedRoutes/HospitalAdminProtected";
-import { Dashboard } from "./screens/hospital-admin/Dashboard";
+import { Dashboard } from "./screens/hospital-admin/dasboard/Dashboard";
 import { Toaster } from "react-hot-toast";
 import FaviconGenerator from "./components/FaviconGenerator";
 import { useEffect } from "react";
 import { check } from "./store/slices/auth.slice";
 import { useAppDispatch } from "./store/hooks";
+// import Employees from "./screens/hospital-admin/Employees";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -41,7 +42,7 @@ function App() {
           <Route path="/hospital-admin" element={<HospitalAdminLayout />}>
             <Route index element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={<Dashboard />} />
-            <Route path="employee" element={<Employees />} />
+            {/* <Route path="employee" element={<Employees />} /> */}
             <Route path="departments" element={<Departments />} />
             <Route path="opd" element={<OPD />} />
             <Route path="patients" element={<Patients />} />
@@ -55,17 +56,17 @@ function App() {
   );
 }
 
-const Employees = () => {
-  const themeClasses = useThemeClasses();
-  return (
-    <div className="p-6">
-      <h1 className={`text-2xl font-bold mb-4 ${themeClasses.text.primary}`}>
-        Employees
-      </h1>
-      <p className={themeClasses.text.secondary}>Manage hospital employees</p>
-    </div>
-  );
-};
+// const Employees = () => {
+//   const themeClasses = useThemeClasses();
+//   return (
+//     <div className="p-6">
+//       <h1 className={`text-2xl font-bold mb-4 ${themeClasses.text.primary}`}>
+//         Employees
+//       </h1>
+//       <p className={themeClasses.text.secondary}>Manage hospital employees</p>
+//     </div>
+//   );
+// };
 
 const Departments = () => {
   const themeClasses = useThemeClasses();

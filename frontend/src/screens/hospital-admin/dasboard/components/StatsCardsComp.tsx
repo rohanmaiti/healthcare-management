@@ -1,6 +1,5 @@
-import React from "react";
 import { Users, Heart, Calendar, DollarSign } from "lucide-react";
-import { useThemeClasses } from "../../../theme";
+import { useThemeClasses } from "../../../../theme";
 
 // in place of this we will have to use useEffect and get the data 
 const statsCards = [
@@ -52,12 +51,12 @@ export const StatsCardsComp = () => {
           <div
             key={index}
             className={`
-                rounded-xl shadow-sm border transition-all duration-200 overflow-hidden
-                hover:shadow-md hover:scale-105 cursor-pointer flex flex-col
+                rounded-xl shadow-sm border overflow-hidden
+                hover:shadow-md flex flex-col
                 ${themeClasses.bg.card} ${themeClasses.border.primary}
               `}
           >
-            {/* Main Content Section */}
+            {/* main content section */}
             <div className={`p-4 flex-1 ${themeClasses.bg.card}`}>
               <div className="flex items-start justify-between mb-3">
                 <div className="flex-1 min-w-0">
@@ -85,7 +84,7 @@ export const StatsCardsComp = () => {
               </div>
             </div>
 
-            {/* Colored Bottom Section */}
+            {/* colored bottom section */}
             <div className={`px-4 py-3 mt-auto ${card.changeColor}`}>
               <p
                 className={`text-xs font-medium ${themeClasses.text.cardChange} break-words`}

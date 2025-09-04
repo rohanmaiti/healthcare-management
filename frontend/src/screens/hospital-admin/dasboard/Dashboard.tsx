@@ -1,4 +1,4 @@
-import { useThemeClasses } from '../../theme';
+import { useThemeClasses } from '../../../theme';
 import { QuickActionsComp } from './components/QuickActionsComp';
 import { StatsCardsComp } from './components/StatsCardsComp';
 
@@ -7,7 +7,6 @@ export const Dashboard = () => {
   const themeClasses = useThemeClasses();
  
   
- 
   const recentActivities = [
     {
       message: 'New patient registered: John Doe',

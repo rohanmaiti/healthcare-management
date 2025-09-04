@@ -1,5 +1,4 @@
-import React from 'react'
-import { useThemeClasses, useThemeContext } from '../../../theme';
+import { useThemeClasses, useThemeContext } from '../../../../theme';
 
 export const QuickActionsComp = () => {
      const { isDark } = useThemeContext();

@@ -45,6 +45,11 @@ export const handle_signup = async (req, res) => {
   }
 };
 
+export const handle_forgot_password = async (req, res) => {
+    const { email } = req.body;
+    
+}
+
 export const logout = (req, res) => {
   res.clearCookie('auth');
   res.status(200).json({ message: 'Logged out' });

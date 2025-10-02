@@ -11,8 +11,7 @@
     "dev": "NODE_ENV=development nodemon src/server.js",
     "start": "NODE_ENV=production node src/server.js",
     "dev:old": "nodemon server.js",
-    "build": "echo 'No build step required for Node.js'",
-    "seed": "node src/examples/loadUserInDB.js"
+    "build": "echo 'No build step required for Node.js'"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",

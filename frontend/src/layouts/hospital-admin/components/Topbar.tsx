@@ -52,9 +52,9 @@ const Topbar: React.FC<TopbarProps> = ({
             <Menu className="h-5 w-5" />
           </button>
 
-          <h1 className={`text-xl font-semibold ${themeClasses.text.primary}`}>
-            {currentMenuItem?.label || "Dashboard"}
-          </h1>
+          <p className={`${themeClasses.text.primary}`}>
+            / {(currentMenuItem?.label)?.toLocaleLowerCase() || "Dashboard"}
+          </p>
         </div>
 
         <div className="flex items-center space-x-3">
@@ -110,6 +110,7 @@ const Topbar: React.FC<TopbarProps> = ({
               </div>
             )}
           </div>
+
         </div>
       </div>
     </header>

@@ -1,15 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 import axiosInstance from "../../lib/axios";
+import type { ApiError } from "../../utils/interfaces";
 
-interface ApiError {
-  response?: {
-    data?: {
-      message?: string;
-    };
-  };
-  message?: string;
-}
+
 
 interface User {
   _id: string;
@@ -37,7 +31,6 @@ interface LoginCredentials {
 }
 
 export const login = createAsyncThunk<
-  User,
   LoginCredentials,
   { rejectValue: string }
 >("/auth/login", async (data, { rejectWithValue }) => {
@@ -107,7 +100,7 @@ export const check = createAsyncThunk(
 const authSlice = createSlice({
   name: "authSlice",
   initialState: {
-    authUser:null,
+    authUser: null,
     isLoading: true, // always start with loading true to prevent the protected routes to make route discition before auth check
     authError: null,
   } as AuthState,
@@ -152,7 +145,7 @@ const authSlice = createSlice({
         toast.error((action.payload as string) || "Logout failed");
       })
       .addCase(check.pending, (state) => {
-         state.isLoading = true;
+        state.isLoading = true;
       })
       .addCase(check.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -161,7 +154,7 @@ const authSlice = createSlice({
       .addCase(check.rejected, (store, action) => {
         store.isLoading = false;
         store.authError = action.payload as string;
-      })
+      });
   },
 });
 

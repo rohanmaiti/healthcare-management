@@ -33,9 +33,6 @@ export const Dashboard = () => {
   return (
     <div className="p-6 space-y-8">
       <div className="flex items-center justify-between">
-        <h2 className={`text-2xl font-bold ${themeClasses.text.primary}`}>
-          Dashboard
-        </h2>
         <div className="text-sm text-gray-500 dark:text-gray-400">
           Last updated: {new Date().toLocaleString()}
         </div>

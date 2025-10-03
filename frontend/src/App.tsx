@@ -22,7 +22,7 @@ function App() {
   useEffect(() => {
     try {
       dispatch(check());
-    } catch (error: any) {
+    } catch (error) {
       console.log(error?.message);
     }
   }, []);
@@ -42,7 +42,7 @@ function App() {
           <Route path="/hospital-admin" element={<HospitalAdminLayout />}>
             <Route index element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={<Dashboard />} />
-            {/* <Route path="employee" element={<Employees />} /> */}
+            {/* <Route path="employee" element={<Employees />} />  */}
             <Route path="departments" element={<Departments />} />
             <Route path="opd" element={<OPD />} />
             <Route path="patients" element={<Patients />} />

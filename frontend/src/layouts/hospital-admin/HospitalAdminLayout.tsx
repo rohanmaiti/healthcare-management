@@ -21,10 +21,10 @@ const HospitalAdminLayout = () => {
   return (
     <div className={`min-h-screen ${themeClasses.bg.main}`}>
       <div className="flex min-h-screen">
-        {/* Mobile menu overlay */}
+        {/* mobile menu overlay */}
         <MobileMenuOverlay isOpen={mobileMenuOpen} onClose={closeMobileMenu} />
 
-        {/* Sidebar - Responsive positioning */}
+        {/* sidebar - responsive positioning */}
         <Sidebar
           sidebarExpanded={sidebarExpanded}
           toggleSidebar={toggleSidebar}
@@ -34,13 +34,13 @@ const HospitalAdminLayout = () => {
           toggleProfileMenu={toggleProfileMenu}
         />
 
-        {/* Main Content Area - Adjusted for fixed sidebar */}
+        {/* main content Area fixed sidebar */}
         <div
           className={`flex-1 flex flex-col min-h-screen ${
             sidebarExpanded ? "md:ml-64" : "md:ml-16"
           } transition-all duration-300`}
         >
-          {/* Header - Sticky positioning */}
+          {/* header - sticky positioning */}
           <div className="sticky top-0 z-30">
             <Topbar
               openMobileMenu={openMobileMenu}
@@ -49,7 +49,7 @@ const HospitalAdminLayout = () => {
             />
           </div>
 
-          {/* Main Content */}
+          {/* main content */}
           <main className={`flex-1 overflow-auto ${themeClasses.bg.main} `}>
             <div className={themeClasses.text.primary}>
               <Outlet />
